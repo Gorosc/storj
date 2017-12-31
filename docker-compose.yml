@@ -1,11 +1,21 @@
-version: "3"
+version: "3.4"
 services:
  storj:
-  image : meldon/storj
+  build: .
+  image: meldon/storj
   container_name: storj_1
   ports:
    - 4000:4000
   volumes: 
    - ./configs:/home/storj/configs
-   - ./data:/home/storj/data
+   - storj_data:/home/storj/data
    - ./logs:/home/storj/logs
+  healthcheck:
+   test: ["CMD", "curl http://localhost:4000 || exit 1"]
+   interval: 1m30s
+   timeout: 10s
+   retries: 3
+  restart: always
+
+volumes:
+  storj_data:

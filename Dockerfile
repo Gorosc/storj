@@ -7,7 +7,7 @@ apt-get -y install apt-utils curl && \
 curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 apt-get -y install build-essential git libssl-dev nodejs python vim && \
 npm install --global storjshare-daemon --unsafe-perm && \
-apt-get --purge remove -y apt-utils build-essential curl git libssl-dev python vim && \
+apt-get --purge remove -y apt-utils build-essential git libssl-dev python && \
 apt autoremove -y && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
@@ -28,5 +28,7 @@ EXPOSE 4000
 EXPOSE 4001
 EXPOSE 4002
 EXPOSE 4003
+
+VOLUME /home/storj/data
 
 CMD ["/home/storj/start.sh"]
